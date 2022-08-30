@@ -12,25 +12,25 @@ $(document).ready(function() {
     //     }
     // })
 
-    $('#cidade').keyup(function() {
+    // $('#cidade').keyup(function() {
 
-        var nome = $(this).val()
+    //     var nome = $(this).val()
 
-        $.ajax({
-            dataType: 'JSON',
-            type: 'GET',
-            assync: true,
-            url: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/35/distritos',
-            success: function(dados) {
-                for (var = 0; i < dados.length; i++) {
-                    if (dados[i].nome == nome) {
-                        console.log(dados[i].nome)
-                        $('#cidade').after(`<p>${dados[i].nome}</p>`)
-                    }
-                }
-            }
-        })
-    })
+    //     $.ajax({
+    //         dataType: 'JSON',
+    //         type: 'GET',
+    //         assync: true,
+    //         url: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/35/distritos',
+    //         success: function(dados) {
+    //             for (var = 0; i < dados.length; i++) {
+    //                 if (dados[i].nome == nome) {
+    //                     console.log(dados[i].nome)
+    //                     $('#cidade').after(`<p>${dados[i].nome}</p>`)
+    //                 }
+    //             }
+    //         }
+    //     })
+    // })
 
     $('.btn-success').click(function(e) {
 
