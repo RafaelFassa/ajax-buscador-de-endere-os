@@ -1,19 +1,35 @@
-$(document).ready(function() {
-    $('#UF').Change(function(e) {
-        e.preventDefault()
+$(document).ready(function(e) {
+    $.ajax({
+        type: "get",
+        dataType: "json",
+        data: { orderBy: "nome" },
+        url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados",
+        success: function(response) {
+            $.each(response, function(indexInArray, valueOfElement) {
+                var option = "<option>" + valueOfElement.sigla + "</option>"
+                $("#uf").append(option)
+            });
+        }
+    });
 
-        var uf = $('#UF').val()
-        var find = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`
 
+
+    $('#uf').change(function(e) {
+        e.preventDefault();
+        $("#local").empty();
+        var uf = $("#uf").val();
+        if (uf == 'Estados') { return }
         $.ajax({
-            dataType: 'JSON',
-            type: 'GET',
-            assync: true,
-            url: find,
-            success: function(dados) {
-                $('#local').val(dados.distritos)
+            type: "get",
+            url: "https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + uf + "/municipios",
+            data: { orderBy: "nome" },
+            dataType: "json",
+            success: function(response) {
+                $.each(response, function(indexInArray, valueOfElement) {
+                    var option = "<option>" + valueOfElement.nome + "</option>"
+                    $("#local").append(option)
+                });
             }
-        })
-
-    })
-})
+        });
+    });
+});
